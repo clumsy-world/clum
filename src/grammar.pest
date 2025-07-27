@@ -1,0 +1,11 @@
+program = { SOI ~ item+ ~ EOI }
+
+item = {
+    identifier
+  | "|>"
+  | "!"
+}
+
+identifier = { ASCII_ALPHA+ }
+
+WHITESPACE = _{ " " | "\t" | "\n" }
