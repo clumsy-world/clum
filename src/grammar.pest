@@ -1,11 +1,19 @@
-program = { SOI ~ item+ ~ EOI }
+program = { SOI ~ pipeline ~ EOI }
 
-item = {
-    identifier
-  | "|>"
-  | "!"
+pipeline = {
+    expression ~ (pipe ~ expression)* ~ pipe ~ execute
 }
 
-identifier = { ASCII_ALPHA+ }
+expression = {
+    identifier
+}
+
+pipe = { "|>" }
+execute = { "!" }
+
+identifier = @ {
+  (ASCII_ALPHA | ASCII_DIGIT) ~ 
+  (ASCII_ALPHA | ASCII_DIGIT | "-")* 
+}
 
 WHITESPACE = _{ " " | "\t" | "\n" }
